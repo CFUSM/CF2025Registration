@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
-        var formURLs = [
-            'https://forms.gle/iVKpq6iCrTYFyQrNA',
-            'https://forms.gle/VocRLgWuq6Uhi5qZ8',
-            'https://forms.gle/Tv7CLdwByZjCLuF9A',
-            'https://forms.gle/pGRqBtK2SGAnVLoD6'
-        ];
-        
-        var randomIndex = Math.floor(Math.random() * formURLs.length);
+        window.onload = function() {
+            var formURLs = [
+                'https://forms.gle/iVKpq6iCrTYFyQrNA',
+                'https://forms.gle/VocRLgWuq6Uhi5qZ8',
+                'https://forms.gle/Tv7CLdwByZjCLuF9A',
+                'https://forms.gle/pGRqBtK2SGAnVLoD6'
+            ];
+            
+            var randomIndex = Math.floor(Math.random() * formURLs.length);
 
-        window.location.href = formURLs[randomIndex];
+            window.location.href = formURLs[randomIndex];
+        };
     </script>
 </head>
 </html>
