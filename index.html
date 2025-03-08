@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
         window.onload = function() {
-            var formURLs = [
-                'https://forms.gle/iVKpq6iCrTYFyQrNA',
-                'https://forms.gle/VocRLgWuq6Uhi5qZ8',
-                'https://forms.gle/Tv7CLdwByZjCLuF9A',
-                'https://forms.gle/pGRqBtK2SGAnVLoD6'
+            var formSequence = [
+                'https://forms.gle/iVKpq6iCrTYFyQrNA', // Form 1
+                'https://forms.gle/pGRqBtK2SGAnVLoD6', // Form 4
+                'https://forms.gle/VocRLgWuq6Uhi5qZ8', // Form 2
+                'https://forms.gle/pGRqBtK2SGAnVLoD6', // Form 4
+                'https://forms.gle/Tv7CLdwByZjCLuF9A', // Form 3
+                'https://forms.gle/pGRqBtK2SGAnVLoD6'  // Form 4
             ];
-            
-            var randomIndex = Math.floor(Math.random() * formURLs.length);
 
-            window.location.href = formURLs[randomIndex];
+            // Get current index from local storage
+            var currentIndex = parseInt(localStorage.getItem('formIndex')) || 0;
+
+            // Redirect to the current form in sequence
+            window.location.href = formSequence[currentIndex];
+
+            // Update index for the next visit (looping back if needed)
+            currentIndex = (currentIndex + 1) % formSequence.length;
+            localStorage.setItem('formIndex', currentIndex);
         };
     </script>
 </head>
