@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
         window.onload = function() {
-            var formSequence = [
-                'https://forms.gle/iVKpq6iCrTYFyQrNA', // Form 1
-                'https://forms.gle/pGRqBtK2SGAnVLoD6', // Form 4
-                'https://forms.gle/VocRLgWuq6Uhi5qZ8', // Form 2
-                'https://forms.gle/pGRqBtK2SGAnVLoD6', // Form 4
-                'https://forms.gle/Tv7CLdwByZjCLuF9A', // Form 3
-                'https://forms.gle/pGRqBtK2SGAnVLoD6'  // Form 4
+            var formURLs = [
+                'https://forms.gle/iVKpq6iCrTYFyQrNA', // 1x
+                'https://forms.gle/VocRLgWuq6Uhi5qZ8', // 1x
+                'https://forms.gle/Tv7CLdwByZjCLuF9A', // 1x
+                'https://forms.gle/pGRqBtK2SGAnVLoD6'  // 5x
             ];
 
-            // Get current index from local storage
-            var currentIndex = parseInt(localStorage.getItem('formIndex')) || 0;
+            var weights = [1, 1, 1, 5]; // Probability ratio
+            var cumulativeWeights = [];
+            var totalWeight = 0;
 
-            // Redirect to the current form in sequence
-            window.location.href = formSequence[currentIndex];
+            // Create cumulative weight array
+            for (var i = 0; i < weights.length; i++) {
+                totalWeight += weights[i];
+                cumulativeWeights.push(totalWeight);
+            }
 
-            // Update index for the next visit (looping back if needed)
-            currentIndex = (currentIndex + 1) % formSequence.length;
-            localStorage.setItem('formIndex', currentIndex);
+            // Generate a random number between 0 and totalWeight
+            var randomNum = Math.random() * totalWeight;
+
+            // Determine which form to select
+            for (var i = 0; i < cumulativeWeights.length; i++) {
+                if (randomNum < cumulativeWeights[i]) {
+                    window.location.href = formURLs[i];
+                    break;
+                }
+            }
         };
     </script>
 </head>
